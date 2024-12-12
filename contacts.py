@@ -45,22 +45,21 @@ def find_contact(): #defining function for finding contact details
 
 
 
-def find_contact(): #defining function for finding contact details
-    name = simpledialog.askstring("Find Contact", "Enter Name to Find:", parent=root)
-    if not name:
-        messagebox.showerror("Error", "Name cannot be empty!", parent=root)
+def show_all_contacts():
+    if not contacts:
+        messagebox.showinfo("All Contacts", "No contacts to display.")
         return
 
-    if name in contacts: #if the name exists in contacts dictionary
-        results = "" # initialising empty string to store contact info for name
-        for contact in contacts[name]: 
-            results += f"Phone: {contact['phone']}\n" #f string to insert phone number in, \n is for new line
-            results += f"Address: {contact['post_code']}\n"
-            results += f"Email: {contact['email'] if contact['email'] else 'N/A'}\n\n" #if no email was entered then will display N/A
+    contact_list = ""
+    for name, details in contacts.items(): #all the contact details in dictionary
+        contact_list += f"Name: {name}\n"
+        for contact in details:
+            contact_list += f"  Phone: {contact['phone']}\n"
+            contact_list += f"  Address: {contact['post_code']}\n"
+            contact_list += f"  Email: {contact['email'] if contact['email'] else 'N/A'}\n\n"
 
-        messagebox.showinfo("Contact Found", f"Name: {name}\n\n{results}", parent=root) #will display contact details
-    else:
-        messagebox.showinfo("Search Result", f"No contact found with the name '{name}'.", parent=root)# if name entered is not in dictionary
+    messagebox.showinfo("All Contacts", contact_list)
+
 
 
 
