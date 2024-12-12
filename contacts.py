@@ -1,6 +1,10 @@
 import tkinter as tk #importing tkinter for the GUI
 from tkinter import messagebox, simpledialog
 
+# Contacts variable, making the dictionary
+contacts = {}
+
+
 root = tk.Tk() #setting up the GUI
 root.title("Contacts App")
 root.configure(bg="blue") #background colour 
