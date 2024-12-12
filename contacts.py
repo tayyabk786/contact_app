@@ -34,3 +34,26 @@ quit_button = tk.Button(root, text="Quit", command=root.quit, font=("Arial", 18)
 quit_button.pack(pady=20)
 
 root.mainloop() #for running the application until user wants to quit
+
+def add_contact(): #add new contact
+    name = simpledialog.askstring("Add Contact", "Enter Name:", parent=root) #for the popup to enter name inside root window
+    if not name:
+        messagebox.showerror("Error", "Name is required!", parent=root) #if no name entered, popup with error message
+        return #stops function from running anymore if no name
+
+    phone = simpledialog.askstring("Add Contact", "Enter Phone Number:", parent=root) #asking user to input phone number
+    post_code = simpledialog.askstring("Add Contact", "Enter Postcode:", parent=root) #user inputs postcode
+    email = simpledialog.askstring("Add Contact", "Enter Email (optional):", parent=root) #asking user to input email, not mandatory
+
+    contact_info = { #the information getting organized and stored in the dictionary
+        "phone": phone, # "phone" stores the phone number
+        "post_code": post_code, #"post_code stores postcode"
+        "email": email, #stores email
+    }
+
+    if name not in contacts:
+        contacts[name] = [] #if name is not in contacts dictionary, it creates a new empty list for the name
+
+    contacts[name].append(contact_info) # takes the dictionary including details (contact_info) and adds to list for the name
+    messagebox.showinfo("Success", f"Contact '{name}' added successfully!", parent=root) #display success message once contact added
+
